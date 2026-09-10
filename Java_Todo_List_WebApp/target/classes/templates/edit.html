@@ -1,0 +1,6 @@
+<!DOCTYPE html><html xmlns:th="http://www.thymeleaf.org"><head><meta charset="UTF-8"><title>Edit Task</title>
+<style>body{font-family:Arial;background:#f3f6fb}.box{max-width:600px;margin:70px auto;background:white;padding:30px;border-radius:16px;box-shadow:0 8px 25px #0001}input,textarea{width:100%;box-sizing:border-box;margin:8px 0 18px;padding:12px;border:1px solid #ccd4df;border-radius:8px}button,a{padding:11px 16px;border:0;border-radius:8px;text-decoration:none;font-weight:bold}.save{background:#315efb;color:white}.back{background:#ddd;color:#222}</style></head>
+<body><div class="box"><h1>✏️ Edit Task</h1><form th:action="@{'/update/'+${task.id}}" method="post">
+<label>Title</label><input name="title" th:value="${task.title}" required><label>Description</label><textarea name="description" rows="5" th:text="${task.description}"></textarea>
+<label><input style="width:auto" type="checkbox" name="completed" th:checked="${task.completed}"> Completed</label><br><br>
+<button class="save">Save Changes</button> <a class="back" href="/">Cancel</a></form></div></body></html>

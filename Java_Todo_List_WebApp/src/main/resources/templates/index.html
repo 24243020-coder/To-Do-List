@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"><head><meta charset="UTF-8"><title>To-Do List</title>
+<style>
+body{font-family:Arial,sans-serif;background:#f3f6fb;margin:0}.container{max-width:900px;margin:40px auto;background:white;padding:30px;border-radius:16px;box-shadow:0 8px 25px #0001}
+h1{color:#26354d}.form{display:grid;gap:10px;margin-bottom:25px}input,textarea{padding:12px;border:1px solid #ccd4df;border-radius:8px;font-size:15px}button,a{padding:10px 15px;border:0;border-radius:8px;text-decoration:none;cursor:pointer;font-weight:bold}.add{background:#315efb;color:white}
+.task{border:1px solid #e0e5ec;padding:16px;border-radius:12px;margin:12px 0;display:flex;justify-content:space-between;gap:15px}.done{text-decoration:line-through;opacity:.55}.actions{display:flex;gap:7px;align-items:center}.edit{background:#ffd45c;color:#222}.delete{background:#ff6565;color:white}.toggle{background:#55b987;color:white}
+small{color:#68758a}
+</style></head><body><div class="container">
+<h1>📝 To-Do List</h1>
+<form class="form" action="/add" method="post"><input name="title" placeholder="Task title" required>
+<textarea name="description" placeholder="Task description"></textarea><button class="add">+ Add Task</button></form>
+<div th:if="${#lists.isEmpty(tasks)}"><p>No tasks yet. Add your first task!</p></div>
+<div class="task" th:each="task:${tasks}">
+<div><h3 th:classappend="${task.completed?'done':''}" th:text="${task.title}"></h3><small th:text="${task.description}"></small></div>
+<div class="actions"><form th:action="@{'/toggle/'+${task.id}}" method="post"><button class="toggle" th:text="${task.completed?'Undo':'Done'}"></button></form>
+<a class="edit" th:href="@{'/edit/'+${task.id}}">Edit</a>
+<form th:action="@{'/delete/'+${task.id}}" method="post"><button class="delete">Delete</button></form></div></div>
+</div></body></html>
